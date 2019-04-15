@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.internetware.apistore.dao.SystemRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.internetware.apistore.model.SystemRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="available" property="available" jdbcType="BIT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, available, description, role
+  </sql>
+  <select id="selectByUserInfo" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    sr.*
+    from system_role sr , system_user_role sur
+     where uid  = #{uid,jdbcType=INTEGER} and sr.id = sur.role_id
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from system_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    sr.*,u.*
+    from system_role sr,
+    system_user_role sur,
+    user_info u
+    where sr.id = sur.role_id and u.uid = sur.uid
+  </select>
+  <select id="findByRoleLike" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    sr.*,u.*
+    from system_role sr,
+    system_user_role sur,
+    user_info u
+    where sr.id = sur.role_id and u.uid = sur.uid
+    and role like   #{role,jdbcType=VARCHAR}
+  </select>
+  <select id="exists" parameterType="java.lang.String" resultType="java.lang.Boolean">
+      <![CDATA[ select count(id) from system_role where  id = #{id,jdbcType=INTEGER} ]]>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from system_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.internetware.apistore.model.SystemRole" >
+    insert into system_role (id, available, description, 
+      role)
+    values (#{id,jdbcType=INTEGER}, #{available,jdbcType=BIT}, #{description,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.internetware.apistore.model.SystemRole" >
+    insert into system_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="available != null" >
+        available,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="available != null" >
+        #{available,jdbcType=BIT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.internetware.apistore.model.SystemRole" >
+    update system_role
+    <set >
+      <if test="available != null" >
+        available = #{available,jdbcType=BIT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.internetware.apistore.model.SystemRole" >
+    update system_role
+    set available = #{available,jdbcType=BIT},
+      description = #{description,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
