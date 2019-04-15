@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.internetware.apistore.dao.SystemRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.internetware.apistore.model.SystemRole" >
+<mapper namespace="com.jiahuixi.shiro.dao.SystemRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.jiahuixi.shiro.model.SystemRole" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="available" property="available" jdbcType="BIT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
@@ -47,13 +47,13 @@
     delete from system_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.internetware.apistore.model.SystemRole" >
+  <insert id="insert" parameterType="com.jiahuixi.shiro.model.SystemRole" >
     insert into system_role (id, available, description, 
       role)
     values (#{id,jdbcType=INTEGER}, #{available,jdbcType=BIT}, #{description,jdbcType=VARCHAR}, 
       #{role,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.internetware.apistore.model.SystemRole" >
+  <insert id="insertSelective" parameterType="com.jiahuixi.shiro.model.SystemRole" >
     insert into system_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -84,7 +84,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.internetware.apistore.model.SystemRole" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiahuixi.shiro.model.SystemRole" >
     update system_role
     <set >
       <if test="available != null" >
@@ -99,7 +99,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.internetware.apistore.model.SystemRole" >
+  <update id="updateByPrimaryKey" parameterType="com.jiahuixi.shiro.model.SystemRole" >
     update system_role
     set available = #{available,jdbcType=BIT},
       description = #{description,jdbcType=VARCHAR},

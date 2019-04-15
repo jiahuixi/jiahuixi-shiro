@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.internetware.apistore.dao.UserInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.internetware.apistore.model.UserInfo" >
+<mapper namespace="com.jiahuixi.shiro.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.jiahuixi.shiro.model.UserInfo" >
     <id column="uid" property="uid" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
@@ -47,7 +47,7 @@
     delete from user_info
     where uid = #{uid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.internetware.apistore.model.UserInfo" >
+  <insert id="insert" parameterType="com.jiahuixi.shiro.model.UserInfo" >
     insert into user_info (uid, name, password, 
       salt, state, username
       )
@@ -55,7 +55,7 @@
       #{salt,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.internetware.apistore.model.UserInfo" >
+  <insert id="insertSelective" parameterType="com.jiahuixi.shiro.model.UserInfo" >
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uid != null" >
@@ -98,7 +98,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.internetware.apistore.model.UserInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiahuixi.shiro.model.UserInfo" >
     update user_info
     <set >
       <if test="name != null" >
@@ -119,7 +119,7 @@
     </set>
     where uid = #{uid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.internetware.apistore.model.UserInfo" >
+  <update id="updateByPrimaryKey" parameterType="com.jiahuixi.shiro.model.UserInfo" >
     update user_info
     set name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
